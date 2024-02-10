@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.loans</groupId>
 	<artifactId>Loans</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>V1</version>
 	<name>LoansMicroService</name>
 	<description>This is a microservice for Loans</description>
 	<properties>
