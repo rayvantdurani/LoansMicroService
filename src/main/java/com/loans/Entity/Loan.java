@@ -20,8 +20,10 @@ import java.util.Map;
 @Document(collection="Loans")
 public class Loan {
 
-    @MongoId
+
     private Long loanId;
+    @MongoId
+    private Long customerId;
     private Long loanAmount;
     private String baseBank;
     private int tenor;

@@ -18,6 +18,7 @@ public class LoanDTO {
 
 
     private Long loanId;
+    private Long customerId;
     private Long loanAmount;
     private String baseBank;
     private int tenor;

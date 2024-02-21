@@ -48,5 +48,12 @@ public class LoansControler {
                 .body(new ResponseDTO(LoanHTTPConstants.STATUS_200,LoanHTTPConstants.MESSAGE_200));
     }
 
+    @GetMapping("/fetch")
+    public ResponseEntity<LoanDTO> getLoan(@RequestBody Long loanId)
+    {
+        LoanDTO loanFound =  iLoanServices.getLoanDetails(loanId);
+        return ResponseEntity.status(HttpStatus.OK).body(loanFound);
+    }
+
 
 }

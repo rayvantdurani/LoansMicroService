@@ -4,10 +4,12 @@ import com.loans.Entity.Loan;
 import com.loans.Exception.LoanAlreadyExists;
 import com.loans.Exception.LoanIdNotFound;
 import com.loans.LoansDTO.LoanDTO;
+import com.loans.LoansDTO.ResponseDTO;
 import com.loans.Mapper.LoanMapper;
 import com.loans.Repository.MongoDB;
 import lombok.AllArgsConstructor;
 import org.springframework.cglib.core.Local;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -26,17 +28,30 @@ public class LoansServicesIMPL implements ILoanServices{
     public void initiateLoan(LoanDTO loanDTO) {
 
         Loan loan = LoanMapper.LOANDTO_TO_LOAN(loanDTO,new Loan());
+        Long loanId = loan.getLoanId();
         Optional<Loan> loanvalid = mongoDB.findByloanId(loan.getLoanId());
-
         if(loanvalid.isPresent())
         {
-            throw new LoanAlreadyExists(loanvalid.get().getLoanId());
+            throw new LoanAlreadyExists(loanId);
         }
         else {
             loan.setCreateAt(LocalDateTime.now());
             loan.setCreatedBy("ADMIN");
             mongoDB.save(loan);
         }
+
+    }
+
+    @Override
+    public LoanDTO getLoanDetails(Long loanId) {
+        Loan loanPresent = mongoDB.findByloanId(loanId).orElseThrow(
+                () ->  new LoanIdNotFound(loanId)
+        );
+
+        loanPresent.setLastModifiedTime(LocalDateTime.now());
+        loanPresent.setLastModifiedBy("ADMIN");
+
+        return LoanMapper.LOAN_ToLOANDTO(loanPresent,new LoanDTO());
     }
 
     @Override

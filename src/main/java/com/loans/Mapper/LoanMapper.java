@@ -14,30 +14,7 @@ public class LoanMapper {
 
     }
 
-    /**
-     * Used to create a Fresh Loan.
-     * @param loanDto
-     * @param loan
-     * @return
-     */
-//    public static Loan newLoanSetup ( LoanDTO loanDto ,Loan loan)
-//    {
-//        loan.setLoanId(loanDto.getLoanId());
-//        loan.setLoanAmount(loanDto.getLoanAmount());
-//        loan.setTenor(loanDto.getTenor());
-//        loan.setBaseBank(loan.getBaseBank());
-//
-//
-//        loan.setCreateAt(LocalDateTime.now());
-//        loan.setCreatedBy("ADMIN");
-//        loan.setLastModifiedBy("ADMIN_1"+" "+LocalDateTime.now());
-//        loan.setLastModifiedTime(LocalDateTime.now());
-//
-//        return loan;
-//    }
-
-
-    /**
+        /**
      * Converts LoanDTO Object to Loan Object(dataBase)
      * @param loanDto
      * @param loan
@@ -46,6 +23,7 @@ public class LoanMapper {
     public static Loan LOANDTO_TO_LOAN (LoanDTO loanDto ,Loan loan)
     {
         loan.setLoanId(loanDto.getLoanId());
+        loan.setCustomerId(loanDto.getCustomerId());
         loan.setLoanAmount(loanDto.getLoanAmount());
         loan.setTenor(loanDto.getTenor());
         loan.setBaseBank(loan.getBaseBank());
@@ -66,6 +44,7 @@ public class LoanMapper {
     {
 
         loanDto.setLoanId(loan.getLoanId());
+        loanDto.setCustomerId(loan.getCustomerId());
         loanDto.setLoanAmount(loan.getLoanAmount());
         loanDto.setTenor(loan.getTenor());
         loanDto.setBaseBank(loan.getBaseBank());
