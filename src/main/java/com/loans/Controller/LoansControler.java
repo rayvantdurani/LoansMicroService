@@ -49,9 +49,9 @@ public class LoansControler {
     }
 
     @GetMapping("/fetch")
-    public ResponseEntity<LoanDTO> getLoan(@RequestBody Long loanId)
+    public ResponseEntity<LoanDTO> getLoan(@RequestParam Long customerId)
     {
-        LoanDTO loanFound =  iLoanServices.getLoanDetails(loanId);
+        LoanDTO loanFound =  iLoanServices.getLoanDetails(customerId);
         return ResponseEntity.status(HttpStatus.OK).body(loanFound);
     }
 

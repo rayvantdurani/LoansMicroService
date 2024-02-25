@@ -7,7 +7,7 @@ public interface ILoanServices {
     void initiateLoan(LoanDTO loanDTO);
 
 
-    LoanDTO getLoanDetails(Long loanId);
+    LoanDTO getLoanDetails(Long customerId);
 
     void deleteLoan(Long loanId);
 

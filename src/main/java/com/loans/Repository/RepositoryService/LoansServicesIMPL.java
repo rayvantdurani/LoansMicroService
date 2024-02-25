@@ -29,7 +29,7 @@ public class LoansServicesIMPL implements ILoanServices{
 
         Loan loan = LoanMapper.LOANDTO_TO_LOAN(loanDTO,new Loan());
         Long loanId = loan.getLoanId();
-        Optional<Loan> loanvalid = mongoDB.findByloanId(loan.getLoanId());
+        Optional<Loan> loanvalid = mongoDB.findBycustomerId(loan.getLoanId());
         if(loanvalid.isPresent())
         {
             throw new LoanAlreadyExists(loanId);
@@ -43,13 +43,13 @@ public class LoansServicesIMPL implements ILoanServices{
     }
 
     @Override
-    public LoanDTO getLoanDetails(Long loanId) {
-        Loan loanPresent = mongoDB.findByloanId(loanId).orElseThrow(
-                () ->  new LoanIdNotFound(loanId)
+    public LoanDTO getLoanDetails(Long customerId) {
+        Loan loanPresent = mongoDB.findBycustomerId(customerId).orElseThrow(
+                () ->  new LoanIdNotFound(customerId)
         );
 
-        loanPresent.setLastModifiedTime(LocalDateTime.now());
-        loanPresent.setLastModifiedBy("ADMIN");
+//        loanPresent.setLastModifiedTime(LocalDateTime.now());
+//        loanPresent.setLastModifiedBy("ADMIN");
 
         return LoanMapper.LOAN_ToLOANDTO(loanPresent,new LoanDTO());
     }
@@ -57,7 +57,7 @@ public class LoansServicesIMPL implements ILoanServices{
     @Override
     public void deleteLoan(Long loanId) {
 
-        Optional<Loan> ifLoanPresnt = mongoDB.findByloanId(loanId);
+        Optional<Loan> ifLoanPresnt = mongoDB.findBycustomerId(loanId);
 
         if(ifLoanPresnt.isPresent())
         {
@@ -73,7 +73,7 @@ public class LoansServicesIMPL implements ILoanServices{
     public void updateLoan(LoanDTO loanDto) {
 
         Loan updatedLoanDetails = LoanMapper.LOANDTO_TO_LOAN(loanDto,new Loan());
-        Loan ifLoanPresnt = mongoDB.findByloanId(updatedLoanDetails.getLoanId())
+        Loan ifLoanPresnt = mongoDB.findBycustomerId(updatedLoanDetails.getLoanId())
                 .orElseThrow(
                         ()-> new LoanIdNotFound(loanDto.getLoanId())
                 );

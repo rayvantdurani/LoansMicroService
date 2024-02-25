@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface MongoDB extends MongoRepository<Loan, Long> {
 
-    Optional<Loan> findByloanId(Long loanId);
+    Optional<Loan> findBycustomerId(Long loanId);
 }

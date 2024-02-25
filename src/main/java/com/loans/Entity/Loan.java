@@ -21,9 +21,9 @@ import java.util.Map;
 public class Loan {
 
 
-    private Long loanId;
     @MongoId
     private Long customerId;
+    private Long loanId;
     private Long loanAmount;
     private String baseBank;
     private int tenor;
